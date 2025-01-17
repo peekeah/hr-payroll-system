@@ -2,6 +2,7 @@ import Sidebar from "@/components/sidebar";
 import SearchUser from "@/assets/search-user.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import BulkUploadModal from "@/components/bulk-upload-modal";
 
 import BulkUpload from "@/assets/bulk-upload.svg";
 import AddEmployee from "@/assets/add-person.svg";
@@ -28,13 +29,7 @@ export default function Home() {
           <div className="text-4xl font-semibold">Start Building Your own team</div>
           <div className="text-lg">Add your first member or import your entire team.</div>
           <div className="flex gap-3 py-5">
-            <Button className="flex gap-2 rounded-lg" variant={"outline"}>
-              <Image
-                color="red"
-                src={BulkUpload}
-                alt="Bulk Uplaod"
-              />
-              Bulk Upload</Button>
+          <BulkUploadModal />
             <Button className="flex gap-2 rounded-lg">
               <Image color="blue" className="text-blue-300" src={AddEmployee} alt="Add Employee" />
               Add Employee</Button>
