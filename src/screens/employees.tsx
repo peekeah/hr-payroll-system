@@ -1,3 +1,5 @@
+"use client";
+
 import { BarChart } from "@/components/charts/bar";
 import { DonutChart } from "@/components/charts/donut";
 import { RadialChart } from "@/components/charts/radial";
@@ -20,8 +22,20 @@ import {
   statusSelectMock
 } from "@/mock";
 import { SearchIcon } from "lucide-react";
+import { useEffect } from "react";
+
+const fetchData = async () => {
+  const res = await fetch("/api/employee/bulk-upload")
+  const data = await res.json();
+  console.log("dd", data)
+  return data;
+}
 
 const Employees = () => {
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <div className="p-5 space-y-5 !h-32">
@@ -61,10 +75,6 @@ const Employees = () => {
               <div className="text-lg">6</div>
               <div>Others</div>
             </div>
-
-
-
-
           </div>
         </Card>
         <Card className="border-0 rounded-xl min-w-[250px] flex-1 bg-secondary-light p-5 flex flex-col justify-between">

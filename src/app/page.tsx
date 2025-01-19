@@ -12,7 +12,7 @@ import AddEmployee from "@/assets/add-person.svg";
 import { Separator } from "@/components/ui/separator";
 import Employees from "@/screens/employees";
 
-export default function Home() {
+export default async function Home() {
   const [displayEmployees, setDisplayEmployees] = useState(true);
 
   return (
