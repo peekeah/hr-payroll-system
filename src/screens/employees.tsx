@@ -191,7 +191,7 @@ const Employees = () => {
           </div>
         </div>
       </div >
-      <div>
+      <div className="!w-full">
         <DataTable
           columns={employeeColumns}
           data={employeeMockData}

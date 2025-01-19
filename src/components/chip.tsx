@@ -44,7 +44,7 @@ const Chip = ({ status }: ChipProps) => {
         )
       }></span>
       <span className={
-        cn("font-semibold flex-1",
+        cn("flex-1",
           `text-${color} `
         )
       }>{name}</span>
