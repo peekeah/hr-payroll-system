@@ -32,7 +32,7 @@ const Navlink = (props: NavProps): ReactNode => {
       cn("flex gap-3 cursor-pointer px-5 py-3 rounded-xl w-full",
         className,
         isActive ?
-          "border bg-secondary" : ""
+          "border bg-secondary-light" : ""
       )
     }>
       <Image
@@ -112,7 +112,7 @@ const Sidebar = () => {
               </Avatar>
               <div>
                 <div>Jhon Doe</div>
-               <div className="text-gray-400">jhondoe@asure.pro</div>
+                <div className="text-gray-400">jhondoe@asure.pro</div>
               </div>
             </div>
           </div>
