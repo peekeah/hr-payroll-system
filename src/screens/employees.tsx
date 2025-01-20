@@ -198,7 +198,8 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
               <Input
                 startIcon={SearchIcon}
                 placeholder="Search employee"
-                className="rounded-xl !focus:outline-none !focus:ring-2 !focus:ring-primary"
+                // className="rounded-xl !focus:outline-none !focus:ring-2 !focus:ring-primary"
+                className="rounded-xl !focus:outline-none !focus:ring-2 !focus:ring-primary !focus:ring-opacity-50"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
               />
