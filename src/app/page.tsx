@@ -12,6 +12,7 @@ import AddEmployee from "@/assets/add-person.svg";
 import { Separator } from "@/components/ui/separator";
 import Employees from "@/screens/employees";
 import { Employee } from "@/mock";
+import { ArrowDownToLine, UserRoundPlus } from "lucide-react";
 
 export default function Home() {
   const [employees, setEmployees] = useState<Employee[]>([])
@@ -29,8 +30,6 @@ export default function Home() {
     fetchData();
   }, [])
 
-  console.log("ee", employees?.length, employees)
-
   return (
     <div className="flex h-screen w-screen">
       <div className="w-[300px] p-5">
@@ -38,7 +37,20 @@ export default function Home() {
       </div>
       <Separator orientation="vertical" />
       <div className="flex-1 bg-slate-50">
-        <div className="bg-white px-10 py-7 text-4xl font-bold">Employees</div>
+        <div className="flex justify-between items-center">
+          <div className="bg-white px-10 py-7 text-4xl font-bold">Employees</div>
+          <div className="flex gap-3">
+            <Button className="rounded-xl p-3">
+              <UserRoundPlus />
+              Add Employee</Button>
+            <Button
+              variant={"outline"}
+              className="rounded-xl p-3"
+            >
+              <ArrowDownToLine />
+              Export</Button>
+          </div>
+        </div>
         <Separator orientation="horizontal" />
         {
           employees?.length ?
