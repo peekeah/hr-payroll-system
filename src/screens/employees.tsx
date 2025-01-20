@@ -209,14 +209,14 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
             </Select>
           </div>
         </div>
-      </div >
-      <div className="!w-full">
+      </div>
+      <div className="">
         <DataTable
           columns={employeeColumns}
           data={employees}
         />
       </div>
-    </div >
+    </div>
   );
 };
 
