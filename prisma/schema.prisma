@@ -23,6 +23,7 @@ enum EmploymentType{
   CONTRACT
   FULL_TIME
   PART_TIME
+  INTERN
 }
 
 model Employee{
@@ -30,8 +31,10 @@ model Employee{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   employeeId String 
+  employeeName String
   employeeProfile String
   email String
+  role String
   status Status @default(ACTIVE)
   nationality String
   employmentType EmploymentType @default(CONTRACT)

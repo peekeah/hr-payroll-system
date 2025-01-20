@@ -48,6 +48,7 @@ export async function POST(req: Request) {
         return acc;
       }, {} as EmployeeCreateInput)
     );
+
     await prisma.employee.createMany({
       data: jsonData
     })
@@ -58,6 +59,7 @@ export async function POST(req: Request) {
     })
 
   } catch (err) {
+    console.log("ee", err)
     return Response.json({
       status: false,
       message: "Error while bulk upload"

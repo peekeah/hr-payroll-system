@@ -69,6 +69,20 @@ export const employeeColumns = [
     enableHiding: false,
   },
   {
+    accessorKey: "employeeName",
+    header: ({ column }) => (
+      <Button
+        className="text-lg flex w-full justify-between"
+        variant={"ghost"}
+      >
+        Employee Name
+        <ChevronsUpDown />
+      </Button>
+    ),
+    enableSorting: true,
+    enableHiding: true,
+  },
+  {
     accessorKey: "employeeProfile",
     header: ({ column }) => (
       <Button
@@ -102,7 +116,7 @@ export const employeeColumns = [
     enableHiding: true,
   },
   {
-    accessorKey: "Role",
+    accessorKey: "role",
     header: ({ column }) => (
       <Button
         className="text-lg flex w-full justify-between"
