@@ -79,9 +79,37 @@ export default function Home() {
     fetchData();
   }, [])
 
-  const isLoading = (employeeLoading && !emloyeeError) || (isPending && !isError);
+  const handleExport = async () => {
+    try {
+      const response = await fetch('/api/employee/download-report', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        },
+      });
 
-  console.log("api req:", { isPending, isError, isSuccess, data, error })
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const downloadUrl = window.URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = 'employee-report.xlsx';
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      window.URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+      console.error('Error downloading file:', error);
+      // Add your error handling here (e.g., showing a toast message)
+    }
+  };
+  const isLoading = (employeeLoading && !emloyeeError) || (isPending && !isError);
 
   return (
     <div className="flex h-screen w-screen">
@@ -106,6 +134,7 @@ export default function Home() {
                 <Button
                   variant={"outline"}
                   className="rounded-xl p-3"
+                  onClick={handleExport}
                 >
                   <ArrowDownToLine />
                   Export</Button>
