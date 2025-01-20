@@ -95,24 +95,24 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
               />
             </div>
           </div>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-x-3 gap-y-3 flex-wrap">
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-primary"></div>
-              <div>{employeesStats?.nationality?.singaporean}</div>
-              <div >Singaporean</div>
+              <div className="candle bg-primary"></div>
+              <div className="text-xl">{employeesStats?.nationality?.singaporean}</div>
+              <div className="">Singaporean</div>
             </div>
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-primary"></div>
+              <div className="candle bg-chart-3"></div>
               <div className="text-lg">{employeesStats?.nationality?.PR}</div>
               <div>PR</div>
             </div>
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-secondary"></div>
+              <div className="candle bg-yellow"></div>
               <div className="text-lg">{employeesStats?.nationality?.foreigners}</div>
               <div>Foreigner</div>
             </div>
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-primary"></div>
+              <div className="candle bg-chart-4"></div>
               <div className="text-lg">{employeesStats?.nationality?.Others}</div>
               <div>Others</div>
             </div>
@@ -130,24 +130,24 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
             />
           </div>
 
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-x-5 gap-y-3 flex-wrap">
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-primary"></div>
+              <div className="candle bg-primary"></div>
               <div>{employeesStats?.employmentType?.FULL_TIME}</div>
               <div >Full Timers</div>
             </div>
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-primary"></div>
+              <div className="candle bg-yellow"></div>
               <div className="text-lg">{employeesStats?.employmentType?.PART_TIME}</div>
               <div>Part Timers</div>
             </div>
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-secondary"></div>
+              <div className="candle bg-chart-3"></div>
               <div className="text-lg">{employeesStats?.employmentType?.CONTRACT}</div>
               <div>Contract</div>
             </div>
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-primary"></div>
+              <div className="candle bg-chart-4"></div>
               <div className="text-lg">{employeesStats?.employmentType?.INTERN || 0}</div>
               <div>Interns</div>
             </div>
@@ -169,19 +169,19 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
               /></div>
           </div>
 
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-x-5 gap-y-3 flex-wrap">
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-primary"></div>
+              <div className="candle bg-primary"></div>
               <div>{employeesStats?.status?.ACTIVE}</div>
               <div>Active</div>
             </div>
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-primary"></div>
+              <div className="candle bg-yellow"></div>
               <div className="text-lg">{employeesStats?.status?.INVITE_SENT}</div>
               <div>Invite Sent</div>
             </div>
             <div className="flex gap-3 items-center">
-              <div className="w-2 h-8 rounded-full bg-secondary"></div>
+              <div className="candle bg-chart-3"></div>
               <div className="text-lg">{employeesStats?.status?.PAYROLL_ONLY}</div>
               <div>Payroll Only</div>
             </div>

@@ -38,6 +38,7 @@ export default {
           foreground: 'hsl(var(--muted-foreground))'
         },
         gray: 'hsl(var(--gray))',
+        yellow: 'hsl(var(--yellow))',
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           light: 'hsl(var(--accent-light))',

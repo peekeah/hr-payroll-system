@@ -24,6 +24,7 @@ body {
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --gray: 180 5% 39%;
+    --yellow: 48 96% 50%;
     --accent: 271 81% 50%;
     --accent-light: 270 100% 95%;
     --accent-foreground: 240 5.9% 10%;
@@ -77,5 +78,11 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities{
+  .candle{
+    @apply w-2 h-7 pr-2 rounded-full;
   }
 }
