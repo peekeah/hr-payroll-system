@@ -108,7 +108,7 @@ const Sidebar = () => {
             <div className="flex gap-5 items-center p-3">
               <Avatar>
                 <AvatarImage src="https://avatars.githubusercontent.com/u/59255732?v=4" />
-                <AvatarFallback>Avatar</AvatarFallback>
+                <AvatarFallback>A</AvatarFallback>
               </Avatar>
               <div>
                 <div>Jhon Doe</div>

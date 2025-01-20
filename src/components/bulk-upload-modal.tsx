@@ -1,63 +1,40 @@
 "use client";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "./ui/button";
 import Image from "next/image";
 
 import Download from "@/assets/download.svg";
-import BulkUpload from "@/assets/bulk-upload.svg";
 import Files from "@/assets/files.png";
 import Excel from "@/assets/excel-logo.png";
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
-const BulkUploadModal = () => {
-  const [file, setFile] = useState<undefined | File>();
+interface Props {
+  file: File | null | undefined;
+  setFile: Dispatch<SetStateAction<File | undefined | null>>
+  onClose: () => void;
+  openModal: boolean;
+  submitAction: (file: File) => void
+}
+
+const BulkUploadModal = ({ file, setFile, onClose, openModal, submitAction }: Props) => {
 
   const handleFileUpload = async () => {
     try {
       if (!file) return;
-
-      // File upload
-      console.log("ff", file)
-
-      const payload = new FormData();
-      payload.set("file", file);
-      const config = {
-        method: "POST",
-        "Content-Type": "application/json",
-        body: payload
-      };
-
-      const res = await fetch("/api/employee/bulk-upload", config)
-      const resData = await res.json();
-
-      console.log("res:", resData)
-
+      submitAction(file)
     } catch (err) {
       console.log("err", err)
     }
   }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className="flex gap-2 rounded-lg"
-          variant={"outline"}
-        >
-          <Image
-            color="red"
-            src={BulkUpload}
-            alt="Bulk Uplaod"
-          />
-          Bulk Upload</Button>
-      </DialogTrigger>
+    <Dialog open={openModal}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Upload file</DialogTitle>
@@ -114,13 +91,11 @@ const BulkUploadModal = () => {
               Download XLSX</Button>
           </div>
           <div className="py-3 flex justify-end gap-3">
-            <DialogClose asChild>
-              <Button
-                variant={"outline"}
-                className="rounded-xl"
-                onClick={() => { }}
-              >Cancel</Button>
-            </DialogClose>
+            <Button
+              variant={"outline"}
+              className="rounded-xl"
+              onClick={onClose}
+            >Cancel</Button>
             <Button
               className="rounded-xl"
               onClick={handleFileUpload}
