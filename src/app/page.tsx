@@ -42,7 +42,9 @@ export default function Home() {
         <Separator orientation="horizontal" />
         {
           employees?.length ?
-            <Employees /> :
+            <Employees
+              employees={employees}
+            /> :
             <div className="space-y-3 flex flex-col justify-center items-center border m-10 p-14 rounded-2xl bg-white">
               <div>
                 <Image
