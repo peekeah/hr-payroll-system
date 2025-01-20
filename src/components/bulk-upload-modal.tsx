@@ -33,6 +33,17 @@ const BulkUploadModal = ({ file, setFile, onClose, openModal, submitAction }: Pr
     }
   }
 
+  const downloadTemplate = () => {
+    const uri = "./bulk-upload-template.xlsx";
+    const link = document.createElement("a");
+    link.href = uri;
+    link.download = "bulk-upload-template.xlsx"
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    onClose();
+  }
+
   return (
     <Dialog open={openModal}>
       <DialogContent>
@@ -81,7 +92,11 @@ const BulkUploadModal = ({ file, setFile, onClose, openModal, submitAction }: Pr
               <div className="font-bold text-sm pb-1">Table Example</div>
               <div className="text-xs">You can download the attached example and use them as a starting point for your own file.</div>
             </div>
-            <Button variant={"outline"} className="rounded-xl">
+            <Button
+              variant={"outline"}
+              className="rounded-xl"
+              onClick={downloadTemplate}
+            >
               <Image
                 src={Download}
                 alt="Download"
