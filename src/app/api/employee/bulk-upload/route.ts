@@ -63,7 +63,7 @@ export async function POST(req: Request) {
     return Response.json({
       status: false,
       message: "Error while bulk upload"
-    })
+    }, { status: 500 })
 
   }
 
