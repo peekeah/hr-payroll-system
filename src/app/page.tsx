@@ -42,9 +42,11 @@ export default function Home() {
         <Separator orientation="horizontal" />
         {
           employees?.length ?
-            <Employees
-              employees={employees}
-            /> :
+            <div className="overflow-y-auto h-full w-full">
+              <Employees
+                employees={employees}
+              />
+            </div> :
             <div className="space-y-3 flex flex-col justify-center items-center border m-10 p-14 rounded-2xl bg-white">
               <div>
                 <Image

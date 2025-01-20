@@ -43,7 +43,7 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
   }, [])
 
   return (
-    <div className="p-5 space-y-5 !h-32">
+    <div className="p-5 space-y-5">
       {/* Cards */}
       <div className="flex gap-3 w-full">
         <Card className="border-0 max-w-[180px] bg-secondary-light rounded-xl p-5 flex flex-col justify-between">
@@ -208,7 +208,7 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
       <div className="!w-full">
         <DataTable
           columns={employeeColumns}
-          data={employeeMockData}
+          data={employees}
         />
       </div>
     </div >

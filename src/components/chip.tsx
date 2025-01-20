@@ -7,17 +7,17 @@ interface ChipProps {
 }
 
 const config = {
-  active: {
+  ACTIVE: {
     name: "Active",
     color: "primary",
     backgroundColor: "primary-light"
   },
-  payroll_only: {
+  PAYROLL_ONLY: {
     name: "Payroll Only",
     color: "secondary",
     backgroundColor: "secondary-light"
   },
-  invite_sent: {
+  INVITE_SENT: {
     name: "Invite Sent",
     color: "accent",
     backgroundColor: "accent-light"

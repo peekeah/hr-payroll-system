@@ -102,7 +102,7 @@ export const employeeColumns = [
     enableHiding: true,
   },
   {
-    accessorKey: "role",
+    accessorKey: "Role",
     header: ({ column }) => (
       <Button
         className="text-lg flex w-full justify-between"
