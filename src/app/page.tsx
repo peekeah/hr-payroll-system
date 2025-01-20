@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "@/components/sidebar";
 import SearchUser from "@/assets/search-user.png";
 import Image from "next/image";
@@ -11,9 +11,25 @@ import BulkUpload from "@/assets/bulk-upload.svg";
 import AddEmployee from "@/assets/add-person.svg";
 import { Separator } from "@/components/ui/separator";
 import Employees from "@/screens/employees";
+import { Employee } from "@/mock";
 
-export default async function Home() {
-  const [displayEmployees, setDisplayEmployees] = useState(true);
+export default function Home() {
+  const [employees, setEmployees] = useState<Employee[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/employee")
+        const resData = await res.json();
+        setEmployees(resData?.data)
+      } catch (err) {
+        console.log("error while fetching data:", err)
+      }
+    }
+    fetchData();
+  }, [])
+
+  console.log("ee", employees?.length, employees)
 
   return (
     <div className="flex h-screen w-screen">
@@ -25,7 +41,7 @@ export default async function Home() {
         <div className="bg-white px-10 py-7 text-4xl font-bold">Employees</div>
         <Separator orientation="horizontal" />
         {
-          displayEmployees ?
+          employees?.length ?
             <Employees /> :
             <div className="space-y-3 flex flex-col justify-center items-center border m-10 p-14 rounded-2xl bg-white">
               <div>

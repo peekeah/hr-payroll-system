@@ -25,9 +25,8 @@ import { SearchIcon } from "lucide-react";
 import { useEffect } from "react";
 
 const fetchData = async () => {
-  const res = await fetch("/api/employee/bulk-upload")
+  const res = await fetch("/api/employee")
   const data = await res.json();
-  console.log("dd", data)
   return data;
 }
 
@@ -207,7 +206,6 @@ const Employees = () => {
           data={employeeMockData}
         />
       </div>
-
     </div >
   );
 };

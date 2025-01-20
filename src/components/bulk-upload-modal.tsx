@@ -1,6 +1,7 @@
 "use client";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -18,7 +19,32 @@ import { useState } from "react";
 
 const BulkUploadModal = () => {
   const [file, setFile] = useState<undefined | File>();
-  console.log("fiile", file)
+
+  const handleFileUpload = async () => {
+    try {
+      if (!file) return;
+
+      // File upload
+      console.log("ff", file)
+
+      const payload = new FormData();
+      payload.set("file", file);
+      const config = {
+        method: "POST",
+        "Content-Type": "application/json",
+        body: payload
+      };
+
+      const res = await fetch("/api/employee/bulk-upload", config)
+      const resData = await res.json();
+
+      console.log("res:", resData)
+
+    } catch (err) {
+      console.log("err", err)
+    }
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -46,15 +72,19 @@ const BulkUploadModal = () => {
             onChange={(e) => setFile(e?.target?.files?.[0])}
           />
           <label htmlFor="file" className="cursor-pointer">
-            <div className="h-48 bg-secondary border-2 border-primary rounded-xl border-dashed flex flex-col items-center justify-center">
+            <div className="h-48 bg-secondary-light border-2 border-primary rounded-xl border-dashed flex flex-col items-center justify-center">
               <Image
                 src={Files}
                 alt="File upload"
                 width={64}
               />
-              <div className="text-sm text-center bg-muted">Drag and drop your file here<br />
-                or <span className="underline">click to upload</span>
-              </div>
+              {
+                !file ?
+                  <div className="text-sm text-center bg-muted">Drag and drop your file here<br />
+                    or <span className="underline">click to upload</span>
+                  </div> :
+                  <div>{file?.name}</div>
+              }
             </div>
 
           </label>
@@ -62,8 +92,7 @@ const BulkUploadModal = () => {
             <div className="text-xs text-gray-700">Supported Formats: XLS, CSV</div>
             <div className="text-xs text-gray-700">Maximum file size: 25MB</div>
           </div>
-          <div>{file?.name}</div>
-          <div className="flex items-center gap-3 bg-secondary rounded-lg p-3 my-5">
+          <div className="flex items-center gap-3 bg-secondary-light rounded-lg p-3 my-5">
             <div>
               <Image
                 src={Excel}
@@ -85,8 +114,17 @@ const BulkUploadModal = () => {
               Download XLSX</Button>
           </div>
           <div className="py-3 flex justify-end gap-3">
-            <Button variant={"outline"} className="rounded-xl">Cancel</Button>
-            <Button className="rounded-xl">Continue</Button>
+            <DialogClose asChild>
+              <Button
+                variant={"outline"}
+                className="rounded-xl"
+                onClick={() => { }}
+              >Cancel</Button>
+            </DialogClose>
+            <Button
+              className="rounded-xl"
+              onClick={handleFileUpload}
+            >Continue</Button>
           </div>
         </div>
       </DialogContent>
