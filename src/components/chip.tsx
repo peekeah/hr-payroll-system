@@ -27,13 +27,12 @@ const config = {
 const Chip = ({ status }: ChipProps) => {
 
   const { name, color, backgroundColor } = config[status];
-  console.log("value:", name, `text-${color}`, `bg-${backgroundColor}`);
 
   return (
     <div
       className={
         cn(
-          "w-fit h-fit flex items-center gap-3 px-5 py-2 rounded-full",
+          "w-fit h-fit flex items-center gap-3 px-5 py-1 rounded-full",
           `bg-${backgroundColor}`
         )
       }>
