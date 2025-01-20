@@ -6,6 +6,9 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/screens/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/mock/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -34,6 +37,7 @@ export default {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))'
         },
+        gray: 'hsl(var(--gray))',
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           light: 'hsl(var(--accent-light))',

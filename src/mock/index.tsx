@@ -3,15 +3,6 @@ import Chip from "@/components/chip";
 import { Button } from "@/components/ui/button";
 import { ChevronsUpDown } from "lucide-react";
 
-export const roleSelectMock = [
-  { "label": "Senior Marketer", "value": "senior_marketer" },
-  { "label": "Lead Designer", "value": "lead_designer" },
-  { "label": "Product Manager", "value": "product_manager" },
-  { "label": "Lead Marketer", "value": "lead_marketer" },
-  { "label": "Lead Growth", "value": "lead_growth" },
-  { "label": "Product Designer", "value": "product_designer" }
-]
-
 export const statusSelectMock = [
   { "label": "Active", "value": "active" },
   { "label": "Payroll Only", "value": "payroll_only" },
@@ -22,7 +13,7 @@ export type Status = "active" | "payroll_only" | "intive_sent";
 export const employeeColumns = [
   {
     accessorKey: "id",
-    header: ({ table }) => (
+    header: ({ table }: { table: any }) => (
       <span className="px-3">
         <Checkbox
           checked={
@@ -35,7 +26,7 @@ export const employeeColumns = [
         />
       </span>
     ),
-    cell: ({ row }) => (
+    cell: ({ row }: { row: any }) => (
       <span className="px-3">
         <Checkbox
           checked={row.getIsSelected()}
@@ -50,7 +41,7 @@ export const employeeColumns = [
   },
   {
     accessorKey: "employeeId",
-    header: ({ table }) => (
+    header: () => (
       <Button
         className="text-lg flex w-full justify-between"
         variant={"ghost"}
@@ -60,7 +51,7 @@ export const employeeColumns = [
         <ChevronsUpDown />
       </Button>
     ),
-    cell: ({ row }) => (
+    cell: ({ row }: { row: any }) => (
       <span className="px-3 text-primary underline">
         {row.getValue("employeeId")}
       </span>
@@ -70,7 +61,7 @@ export const employeeColumns = [
   },
   {
     accessorKey: "employeeName",
-    header: ({ column }) => (
+    header: () => (
       <Button
         className="text-lg flex w-full justify-between"
         variant={"ghost"}
@@ -84,7 +75,7 @@ export const employeeColumns = [
   },
   {
     accessorKey: "employeeProfile",
-    header: ({ column }) => (
+    header: () => (
       <Button
         className="text-lg flex w-full justify-between"
         variant={"ghost"}
@@ -102,7 +93,7 @@ export const employeeColumns = [
   },
   {
     accessorKey: "email",
-    header: ({ column }) => (
+    header: () => (
       <Button
         className="text-lg flex w-full justify-between"
         variant={"ghost"}
@@ -117,7 +108,7 @@ export const employeeColumns = [
   },
   {
     accessorKey: "role",
-    header: ({ column }) => (
+    header: () => (
       <Button
         className="text-lg flex w-full justify-between"
         variant={"ghost"}
@@ -132,7 +123,7 @@ export const employeeColumns = [
   },
   {
     accessorKey: "status",
-    header: ({ column }) => (
+    header: () => (
       <Button
         className="text-lg flex w-full justify-between"
         variant={"ghost"}
@@ -157,6 +148,7 @@ export const employeeColumns = [
 
 export interface Employee {
   employeeId: string;
+  employeeName: string;
   employeeProfile: string;
   email: string;
   role: "Senior Marketer" | "Lead Designer" | "Product Manager" | "Lead Marketer" | "Lead Growth" | "Product Designer";

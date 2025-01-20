@@ -18,7 +18,6 @@ import {
 import {
   Employee,
   employeeColumns,
-  roleSelectMock,
   statusSelectMock
 } from "@/mock";
 import { SearchIcon } from "lucide-react";
@@ -31,8 +30,29 @@ const fetchData = async () => {
   return resData?.data
 }
 
+const filterData = (employees: Employee[], searchText: string, filterStatus: string, filterRole: string) => {
+  if (searchText) {
+    employees = employees.filter(el =>
+      el.employeeName.toLowerCase().includes(searchText.toLowerCase()) ||
+      el.employeeId.toLowerCase().includes(searchText.toLowerCase())
+    )
+  }
+  if (filterStatus) {
+    employees = employees.filter(el => el.status.toLocaleLowerCase() === filterStatus)
+  }
+  if (filterRole) {
+    employees = employees.filter(el => el.role === filterRole)
+  }
+  return employees;
+}
+
+type SelectOption = { label: string, value: string };
 const Employees = ({ employees }: { employees: Employee[] }) => {
+  const [searchText, setSearchText] = useState<string>("");
   const [employeesStats, setEmployeeStats] = useState<any | null>(null);
+  const [filterRole, setFilterRole] = useState<string>("")
+  const [filterStatus, setFilterStatus] = useState<string>("")
+  const filteredEmployees = filterData(employees, searchText, filterStatus, filterRole)
 
   useEffect(() => {
     fetchData().then((stats) => {
@@ -40,16 +60,32 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
     })
   }, [])
 
+  const roleSet: Set<string> = new Set();
+  employees.forEach(el => {
+    roleSet.add(el.role)
+  })
+
+  const roleOptions: SelectOption[] = [];
+
+  roleSet.forEach(role => {
+    if (role) {
+      roleOptions.push({
+        label: role,
+        value: role
+      })
+    }
+  })
+
   return (
-    <div className="p-5 space-y-5">
+    <div className="p-7 space-y-5">
       {/* Cards */}
-      <div className="flex gap-3 w-full">
-        <Card className="border-0 max-w-[180px] bg-secondary-light rounded-xl p-5 flex flex-col justify-between">
+      <div className="flex flex gap-5 w-full">
+        <Card className="border-0 w-[25%] bg-white p-5 flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <div className="text-muted pb-3">Nationality</div>
+              <div className="text-gray text-lg">Nationality</div>
               <div>
-                <div className="text-4xl font-bold pt-5">{employeesStats?.totalCount}</div>
+                <div className="text-5xl font-bold pt-4">{employeesStats?.nationality?.singaporean}</div>
                 <div className="text-lg">Singporeans</div>
               </div>
             </div>
@@ -82,11 +118,11 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
             </div>
           </div>
         </Card>
-        <Card className="border-0 rounded-xl min-w-[250px] flex-1 bg-secondary-light p-5 flex flex-col justify-between">
+        <Card className="border-0 rounded-xl w-[45%] flex-1 bg-white p-5 flex flex-col justify-between">
           <div>
-            <div className="text-muted pb-3">Employment Type</div>
+            <div className="text-gray">Employment Type</div>
             <div>
-              <div className="text-4xl font-bold pt-5">{employeesStats?.totalCount}</div>
+              <div className="text-5xl font-bold pt-4">{employeesStats?.totalCount}</div>
               <div className="text-lg">Full Timers</div>
             </div>
             <BarChart
@@ -118,12 +154,12 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
           </div>
 
         </Card>
-        <Card className="rounded-xl border-0 max-w-[200px] bg-secondary-light p-5 flex flex-col justify-between">
+        <Card className="rounded-xl border-0 w-[30%] bg-white p-5 flex flex-col justify-between">
           <div className="flex justify-between">
             <div>
-              <div className="text-muted pb-3">Employee Status</div>
+              <div className="text-gray">Employee Status</div>
               <div>
-                <div className="text-4xl font-bold pt-5">{employeesStats?.status?.ACTIVE}</div>
+                <div className="text-5xl font-bold pt-4">{employeesStats?.status?.ACTIVE}</div>
                 <div className="text-lg">Active Employees</div>
               </div>
             </div>
@@ -154,66 +190,74 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
       </div >
 
       {/* Table */}
-      < div className="flex justify-between py-5" >
-        <div className="text-2xl font-semibold">All Employees</div>
-        <div className="flex gap-3">
-          <div>
-            <Input
-              startIcon={SearchIcon}
-              placeholder="Search employee"
-              className="rounded-xl !focus:outline-none !focus:ring-2 !focus:ring-primary"
-            />
-          </div>
-          <div>
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="All Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>All Status</SelectLabel>
-                  <>
-                    {
-                      statusSelectMock?.map(status => (
-                        <SelectItem
-                          key={status.value}
-                          value={status.value}
-                        >{status.label}</SelectItem>
-                      ))
-                    }
-                  </>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Select>
-              <SelectTrigger className="w-[220px]">
-                <SelectValue placeholder="All Role" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>All Role</SelectLabel>
-                  <>
-                    {
-                      roleSelectMock?.map(role => (
-                        <SelectItem
-                          key={role.value}
-                          value={role.value}
-                        >{role.label}</SelectItem>
-                      ))
-                    }
-                  </>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+      <div>
+        <div className="flex justify-between py-5">
+          <div className="text-2xl font-semibold">All Employees</div>
+          <div className="flex gap-3">
+            <div>
+              <Input
+                startIcon={SearchIcon}
+                placeholder="Search employee"
+                className="rounded-xl !focus:outline-none !focus:ring-2 !focus:ring-primary"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+            </div>
+            <div>
+              <Select
+                value={filterStatus}
+                onValueChange={(val) => setFilterStatus(val)}
+              >
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="All Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>All Status</SelectLabel>
+                    <>
+                      {
+                        statusSelectMock?.map(status => (
+                          <SelectItem
+                            key={status.value}
+                            value={status.value}
+                          >{status.label}</SelectItem>
+                        ))
+                      }
+                    </>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Select
+                value={filterRole}
+                onValueChange={(val) => setFilterRole(val)}
+              >
+                <SelectTrigger className="w-[220px]">
+                  <SelectValue placeholder="All Role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>All Role</SelectLabel>
+                    <>
+                      {
+                        roleOptions?.map(role => (
+                          <SelectItem
+                            key={role.value}
+                            value={role.value}
+                          >{role.label}</SelectItem>
+                        ))
+                      }
+                    </>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="">
         <DataTable
           columns={employeeColumns}
-          data={employees}
+          data={filteredEmployees}
         />
       </div>
     </div>

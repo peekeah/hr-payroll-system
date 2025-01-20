@@ -28,9 +28,9 @@ export function RadialChart({ data }: { data: any }) {
   return (
     <ChartContainer
       config={chartConfig}
-      className="mx-auto h-[150px] aspect-square"
+      className="mx-auto p-0 h-[150px] aspect-square"
     >
-      <PieChart className="">
+      <PieChart>
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent hideLabel />}
@@ -43,7 +43,6 @@ export function RadialChart({ data }: { data: any }) {
           paddingAngle={5}
           cornerRadius={8}
           endAngle={180}
-        // strokeWidth={2}
         />
       </PieChart>
     </ChartContainer>

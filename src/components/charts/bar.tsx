@@ -143,7 +143,7 @@ export function BarChart({ data }: { data: Record<string, number> }) {
   }, [data]);
 
   return (
-    <div ref={parentRef} className="h-[100px] w-full relative">
+    <div ref={parentRef} className="h-[60px] w-full relative">
       <ResponsiveContainer width="100%" height="100%">
         <BaseBarChart
           data={chartData}
