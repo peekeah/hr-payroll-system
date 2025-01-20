@@ -18,7 +18,6 @@ import {
 import {
   Employee,
   employeeColumns,
-  employeeMockData,
   roleSelectMock,
   statusSelectMock
 } from "@/mock";
@@ -39,7 +38,6 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
     fetchData().then((stats) => {
       setEmployeeStats(stats);
     })
-
   }, [])
 
   return (
@@ -56,7 +54,9 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
               </div>
             </div>
             <div>
-              <DonutChart />
+              <DonutChart
+                data={employeesStats?.nationality}
+              />
             </div>
           </div>
           <div className="flex gap-2 flex-wrap">
@@ -89,7 +89,9 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
               <div className="text-4xl font-bold pt-5">{employeesStats?.totalCount}</div>
               <div className="text-lg">Full Timers</div>
             </div>
-            <BarChart />
+            <BarChart
+              data={employeesStats?.employmentType}
+            />
           </div>
 
           <div className="flex gap-2 flex-wrap">
@@ -125,7 +127,10 @@ const Employees = ({ employees }: { employees: Employee[] }) => {
                 <div className="text-lg">Active Employees</div>
               </div>
             </div>
-            <div><RadialChart /></div>
+            <div>
+              <RadialChart
+                data={employeesStats?.status}
+              /></div>
           </div>
 
           <div className="flex gap-2 flex-wrap">
