@@ -15,6 +15,7 @@ import { ArrowDownToLine, CircleCheck, CircleX, UserRoundPlus } from "lucide-rea
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Spinner } from "@/components/ui/spinner";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 interface BulkUploadResponse {
   success: boolean;
@@ -139,6 +140,7 @@ export default function Home() {
       })
     }
   };
+
   const isLoading = (employeeLoading && !emloyeeError) || (isPending && !isError);
 
   return (
@@ -157,7 +159,11 @@ export default function Home() {
           <div className="flex-1 bg-slate-50 overflow-y-auto">
             <div className="sticky bg-white z-10 top-0 w-full bg-white flex justify-between items-center">
               <div className="px-10 py-7 text-4xl font-bold">Employees</div>
-              <div className="flex gap-3 mx-5">
+              <div className={
+                cn("flex gap-3 mx-5",
+                  !employees?.length ? "hidden" : ""
+                )
+              }>
                 <Button
                   className="rounded-xl p-3"
                 >
