@@ -1,8 +1,7 @@
 import { prisma } from "@/lib/prisma"
-import { NextApiRequest, NextApiResponse } from "next";
 import * as XLSX from "xlsx";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
   try {
     // Download report;
     const employees = await prisma.employee.findMany({
@@ -42,6 +41,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
       }
     })
   } catch (err) {
+    console.log("Error:", err)
     return Response.json({
       status: false,
       message: "Internal server error"

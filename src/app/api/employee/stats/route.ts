@@ -39,6 +39,7 @@ export async function GET() {
       }
     });
   } catch (err) {
+    console.log("err:", err)
     return Response.json({
       status: false,
       message: "Internal server error"
