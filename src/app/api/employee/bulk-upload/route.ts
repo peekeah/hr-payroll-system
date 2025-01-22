@@ -59,7 +59,7 @@ export async function POST(req: Request) {
     })
 
   } catch (err) {
-    console.log("ee", err)
+    console.log("Error", err)
     return Response.json({
       status: false,
       message: "Error while bulk upload"

@@ -27,7 +27,6 @@ const config = {
 const Chip = ({ status }: ChipProps) => {
 
   const { name, color, backgroundColor } = config[status];
-  console.log("cc:", status, { name, color, backgroundColor })
 
   return (
     <div
