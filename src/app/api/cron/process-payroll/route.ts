@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import { PayrollCalculator } from '@/lib/payroll/calculator';
-import { Prisma } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
+import { PayrollResult } from '@/types/payroll';
+
+
+const prisma = new PrismaClient()
 
 export async function POST(req: Request) {
   try {
@@ -38,7 +41,7 @@ export async function POST(req: Request) {
     );
 
     const records = successfulResults.map((item) => ({
-      employeeId: item.id,
+      employeeRId: item.id,
       grossSalary: new Prisma.Decimal(item.grossSalary),
       cpfEmployee: new Prisma.Decimal(item.cpfEmployee),
       cpfEmployer: new Prisma.Decimal(item.cpfEmployer),

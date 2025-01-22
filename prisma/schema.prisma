@@ -74,8 +74,8 @@ model Employee {
 model PayrollRecord {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
-  employee Employee @relation(fields: [employeeId], references: [id])
-  employeeId Int
+  employee Employee @relation(fields: [employeeRId], references: [id])
+  employeeRId Int
   grossSalary Decimal
   cpfEmployee Decimal
   cpfEmployer Decimal

@@ -1,4 +1,3 @@
-import { prisma } from '@/lib/prisma';
 import { PayrollResult, AgeGroup } from '@/types/payroll';
 import { CPFRatesService } from './cpf-rates';
 

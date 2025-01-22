@@ -12,7 +12,7 @@ export interface CPFRateConfig {
 }
 
 export interface PayrollResult {
-  id: string;
+  id: number;
   employeeId: string;
   employeeName: string;
   grossSalary: number;
