@@ -26,6 +26,7 @@ enum EmploymentType{
   INTERN
 }
 
+/*
 model Employee{
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -38,4 +39,58 @@ model Employee{
   status Status @default(ACTIVE)
   nationality String
   employmentType EmploymentType @default(CONTRACT)
+}
+*/
+
+enum AgeGroupType {
+  BELOW_55
+  FROM_55_TO_60
+  FROM_60_TO_65
+  ABOVE_65
+}
+
+model Employee {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  employeeId String 
+  employeeName String
+  employeeProfile String
+  email String
+  role String
+  status Status @default(ACTIVE)
+  nationality String
+  employmentType EmploymentType @default(CONTRACT)
+  // Add these new fields
+  dateOfBirth DateTime
+  basicSalary Decimal @default(0)
+  allowances Decimal @default(0)
+  residencyStatus String // CITIZEN, PR, or FOREIGNER
+  // Add relation to PayrollRecord if needed
+  payrollRecords PayrollRecord[]
+}
+
+// Add this new model for payroll records
+model PayrollRecord {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  employee Employee @relation(fields: [employeeId], references: [id])
+  employeeId Int
+  grossSalary Decimal
+  cpfEmployee Decimal
+  cpfEmployer Decimal
+  netSalary Decimal
+  processedAt DateTime @default(now())
+}
+
+model CPFRate {
+  id          Int         @id @default(autoincrement())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  effectiveFrom DateTime
+  effectiveTo   DateTime?
+  ageGroup    AgeGroupType
+  employeeRate Decimal    @db.Decimal(5,4)  // Stores rate like 0.2000
+  employerRate Decimal    @db.Decimal(5,4)
+  isActive    Boolean     @default(true)
 }
