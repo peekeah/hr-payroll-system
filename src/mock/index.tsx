@@ -99,7 +99,7 @@ export const employeeColumns = [
         variant={"ghost"}
       // onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Employee Profile
+        Email
         <ChevronsUpDown />
       </Button>
     ),

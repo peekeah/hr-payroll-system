@@ -13,7 +13,10 @@ export async function POST(req: Request) {
     }
 
     const fileBuffer = await file.arrayBuffer();
-    const workbook = XLSX.read(new Uint8Array(fileBuffer), { type: "array" })
+    const workbook = XLSX.read(new Uint8Array(fileBuffer), {
+      type: "array",
+      cellDates: true
+    })
 
     // Get sheet name if not provided
     const sheet = workbook.SheetNames[0];
@@ -29,7 +32,6 @@ export async function POST(req: Request) {
     // Convert to JSON
     const data = XLSX.utils.sheet_to_json(worksheet, {
       raw: true,            // Keep raw values
-      dateNF: 'yyyy-mm-dd', // Date format
       defval: null,         // Default value for empty cells
       header: 1,            // Generate headers from first row
       blankrows: false      // Skip empty rows
@@ -41,10 +43,18 @@ export async function POST(req: Request) {
 
     // Extract headers (first row)
     const headers = data[0];
-    // Map rows to objects using the headers
+
     const jsonData = data.slice(1).map((row) =>
       headers.reduce((acc: any, key, idx) => {
-        acc[key] = row[idx] ?? null; // Use null for missing values
+        let value = row[idx] ?? null;
+
+        // Simple date handling for dateOfBirth
+        if (key === 'dateOfBirth' && value) {
+          const date = new Date(value);
+          value = date.toISOString();
+        }
+
+        acc[key] = value;
         return acc;
       }, {} as EmployeeCreateInput)
     );
